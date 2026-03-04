@@ -1,66 +1,118 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Moona</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #179fcd;
-        }
-        header {
-            background-color: #179fcd;
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-        section {
-            background: white;
-            margin: 20px;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        h2 {
-            color: #2c3e50;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Apartamento Bienvenida</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+/* BARRA SUPERIOR */
+nav {
+    background-color: #2c3e50;
+    padding: 15px;
+    text-align: center;
+}
+
+nav button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    margin: 0 15px;
+    cursor: pointer;
+}
+
+nav button:hover {
+    text-decoration: underline;
+}
+
+/* SECCIONES */
+.section {
+    display: none;
+    padding: 30px;
+    background: white;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.active {
+    display: block;
+}
+
+/* LOGIN */
+#loginBox {
+    text-align: center;
+}
+</style>
 </head>
+
 <body>
 
-<header>
-    <h1>Moona</h1>
-    <p>Esperamos que disfrutéis vuestra estancia</p>
-</header>
+<nav>
+    <button onclick="showSection('apartamento')">🏡 Apartamento</button>
+    <button onclick="showSection('recomendaciones')">🍽 Recomendaciones</button>
+    <button onclick="showSection('info')">📍 Información</button>
+    <button onclick="showSection('privado')">🔐 Área privada</button>
+</nav>
 
-<section>
-    <h2>📶 WiFi</h2>
-    <p>Red: TU_WIFI</p>
-    <p>Contraseña: TU_CONTRASEÑA</p>
-</section>
+<div id="apartamento" class="section active">
+    <h2>Bienvenidos</h2>
+    <p>Gracias por elegir nuestro apartamento.</p>
+</div>
 
-<section>
-    <h2>📋 Normas de la casa</h2>
-    <ul>
-        <li>No fumar</li>
-        <li>Respetar a los vecinos</li>
-        <li>Check-out antes de las 11:00</li>
-    </ul>
-</section>
-
-    <section>
-    <h2>🍽 Restaurantes recomendados</h2>
+<div id="recomendaciones" class="section">
+    <h2>Restaurantes recomendados</h2>
     <ul>
         <li>Restaurante La Playa</li>
         <li>Bar Central</li>
     </ul>
-</section>
-    
+</div>
 
-<section>
-    <h2>📞 Contacto</h2>
-    <p>Teléfono: +34 XXX XXX XXX</p>
-</section>
+<div id="info" class="section">
+    <h2>Información útil</h2>
+    <p>Supermercado a 200m.</p>
+</div>
+
+<div id="privado" class="section">
+    <div id="loginBox">
+        <h2>Área privada</h2>
+        <input type="password" id="password" placeholder="Introduce la contraseña">
+        <br><br>
+        <button onclick="checkPassword()">Entrar</button>
+        <p id="error" style="color:red;"></p>
+    </div>
+
+    <div id="privateContent" style="display:none;">
+        <h2>Contenido privado</h2>
+        <p>Código de la caja de llaves: 1234</p>
+        <p>WiFi: Apartamento123</p>
+    </div>
+</div>
+
+<script>
+function showSection(id) {
+    let sections = document.querySelectorAll('.section');
+    sections.forEach(section => section.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+function checkPassword() {
+    let correctPassword = "1234";  // CAMBIA AQUÍ TU CONTRASEÑA
+    let userPassword = document.getElementById("password").value;
+
+    if (userPassword === correctPassword) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("privateContent").style.display = "block";
+    } else {
+        document.getElementById("error").innerText = "Contraseña incorrecta";
+    }
+}
+</script>
 
 </body>
 </html>
